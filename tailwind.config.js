@@ -8,8 +8,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'ArawMatic-default': '#FFFFED',
-        'Button-default': '#EDEDFF',
+        'arawMatic-default': '#FFFFED',
+        'button-default': '#EDEDFF',
+        'signIn-default': '#50C2C9',
       },
     },
   },

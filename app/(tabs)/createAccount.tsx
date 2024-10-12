@@ -13,14 +13,14 @@ export default function CreateAccount() {
     router.push('./createAccountForm' as const)
   }
   return (
-    <StyledView className='flex-1 items-center justify-center bg-ArawMatic-default'>
+    <StyledView className='flex-1 items-center justify-center bg-arawMatic-default'>
       <Image
         source={require('../../assets/images/arawMaticLogo.png')}
         className='h-16 mt-10 p-32'
         resizeMode='contain'
       />
       <TouchableOpacity
-        className='bg-Button-default px-20 py-4 rounded-md shadow-lg shadow-black mb-36'
+        className='bg-button-default px-20 py-4 rounded-md shadow-lg shadow-black mb-36'
         onPress={handleCreateAccountNavigation}
       >
         <Text className='font-bold'>Create an account</Text>
@@ -28,7 +28,7 @@ export default function CreateAccount() {
       <Text className='mt-36 flex-row text-center font-sans'>
         Already have an account?{' '}
         <TouchableOpacity className='inline'>
-          <StyledText className='text-[#50C2C9]'>Sign In</StyledText>
+          <StyledText className='text-signIn-default'>Sign In</StyledText>
         </TouchableOpacity>
       </Text>
       <StatusBar style='auto' />

@@ -9,7 +9,7 @@ const StyledView = styled(View)
 const StyledTextInput = styled(TextInput)
 
 export default function CreateAccountForm() {
-  const router = useRouter() // Initialize router for navigation
+  const router = useRouter()
   const [fullName, setFullName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
@@ -31,11 +31,11 @@ export default function CreateAccountForm() {
   }
 
   return (
-    <StyledView className='flex-1 items-center justify-center bg-ArawMatic-default p-4'>
+    <StyledView className='flex-1 items-center justify-center bg-arawMatic-default p-4'>
       {/* Back Button */}
       <TouchableOpacity
         className='absolute top-4 left-4'
-        onPress={() => router.back()} // Navigate back
+        onPress={() => router.back()}
       >
         <Text className='text-black opacity-60 font-semibold'>
           {'< '}Go back
@@ -73,7 +73,7 @@ export default function CreateAccountForm() {
           className='absolute right-5 top-[18px]'
           onPress={() => setShowPassword(!showPassword)}
         >
-          <Text className='text-[#50C2C9]'>
+          <Text className='text-signUp-default'>
             {showPassword ? 'Hide' : 'Show'}
           </Text>
         </TouchableOpacity>
@@ -90,14 +90,14 @@ export default function CreateAccountForm() {
           className='absolute right-5 top-[18px]'
           onPress={() => setShowRepeatPassword(!showRepeatPassword)}
         >
-          <Text className='text-[#50C2C9]'>
+          <Text className='text-signIn-default'>
             {showRepeatPassword ? 'Hide' : 'Show'}
           </Text>
         </TouchableOpacity>
       </View>
 
       <TouchableOpacity
-        className={`bg-Button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12 ${
+        className={`bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12 ${
           isFormValid() ? '' : 'opacity-50'
         }`}
         onPress={handleSignUp}
@@ -115,7 +115,7 @@ export default function CreateAccountForm() {
       <Text className='mt-2 text-center font-sans'>
         Already have an account?{' '}
         <TouchableOpacity className='inline'>
-          <StyledText className='text-[#50C2C9]'>Sign In</StyledText>
+          <StyledText className='text-signIn-default'>Sign In</StyledText>
         </TouchableOpacity>
       </Text>
       <StatusBar style='auto' />
