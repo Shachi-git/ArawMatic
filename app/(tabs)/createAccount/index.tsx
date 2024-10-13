@@ -12,6 +12,9 @@ export default function CreateAccount() {
   const handleCreateAccountNavigation = () => {
     router.push('./createAccount/createAccountForm')
   }
+  const handleSignInNavigation = () => {
+    router.push('./createAccount/signInForm')
+  }
   return (
     <StyledView className='flex-1 items-center justify-center bg-arawMatic-default'>
       <Image
@@ -23,12 +26,17 @@ export default function CreateAccount() {
         className='bg-button-default px-20 py-4 rounded-md shadow-lg shadow-black mb-36'
         onPress={handleCreateAccountNavigation}
       >
-        <Text className='font-bold'>Create an account</Text>
+        <Text className='font-bold text-base'>Create an account</Text>
       </TouchableOpacity>
-      <Text className='mt-36 flex-row text-center font-sans'>
+      <Text className='mt-36 flex-row text-center font-sans text-sm'>
         Already have an account?{' '}
         <TouchableOpacity className='inline'>
-          <StyledText className='text-signIn-default'>Sign In</StyledText>
+          <StyledText
+            className='text-signIn-default'
+            onPress={handleSignInNavigation}
+          >
+            Sign In
+          </StyledText>
         </TouchableOpacity>
       </Text>
       <StatusBar style='auto' />
