@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import CreateAccount from './(tabs)/createAccount'
+import CreateAccount from './(tabs)/createAccount/index'
 
 export default function App() {
   return (
