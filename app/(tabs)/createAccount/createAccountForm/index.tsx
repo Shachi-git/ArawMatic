@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from 'react-native'
 import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
+import React from 'react'
 
 const StyledText = styled(Text)
 const StyledView = styled(View)

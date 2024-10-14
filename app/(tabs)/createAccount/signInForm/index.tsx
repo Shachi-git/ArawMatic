@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from 'react-native'
 import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
+import React from 'react'
 
 const StyledView = styled(View)
 const StyledTextInput = styled(TextInput)
@@ -15,6 +16,10 @@ export default function signInForm() {
 
   const handleSignUp = () => {
     console.log({ phoneNumber, password })
+  }
+
+  const handleLoginNavigation = () => {
+    router.push('../../navigator')
   }
 
   return (
@@ -57,7 +62,10 @@ export default function signInForm() {
       <TouchableOpacity
         className='bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12
         '
-        onPress={handleSignUp}
+        onPress={() => {
+          handleSignUp() // This could be your sign-in logic
+          handleLoginNavigation() // Navigate to HomeTabNavigator
+        }}
       >
         <Text className='font-bold text-black opacity-70 text-base'>Login</Text>
       </TouchableOpacity>
