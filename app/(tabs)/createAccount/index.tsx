@@ -29,9 +29,11 @@ export default function CreateAccount() {
       >
         <Text className='font-bold text-base'>Create an account</Text>
       </TouchableOpacity>
-      <Text className='mt-36 flex-row text-center font-sans text-sm'>
-        Already have an account?{' '}
-        <TouchableOpacity className='inline'>
+      <View className='flex-row mt-36 text-center font-sans text-sm'>
+        <View>
+          <Text>Already have an account? </Text>
+        </View>
+        <TouchableOpacity>
           <StyledText
             className='text-signIn-default'
             onPress={handleSignInNavigation}
@@ -39,7 +41,7 @@ export default function CreateAccount() {
             Sign In
           </StyledText>
         </TouchableOpacity>
-      </Text>
+      </View>
       <StatusBar style='auto' />
     </StyledView>
   )

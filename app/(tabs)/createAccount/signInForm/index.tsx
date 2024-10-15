@@ -22,16 +22,12 @@ export default function signInForm() {
     router.push('../../navigator')
   }
 
+  const handleCreateAccountNavigation = () => {
+    router.push('../createAccountForm')
+  }
+
   return (
     <StyledView className='flex-1 items-center justify-center bg-arawMatic-default p-4'>
-      <TouchableOpacity
-        className='absolute top-4 left-4'
-        onPress={() => router.back()}
-      >
-        <Text className='text-black opacity-60 font-semibold'>
-          {'< '}Go back
-        </Text>
-      </TouchableOpacity>
       <Text className='text-xl font-bold opacity-75 mb-9'>
         Log into ArawMatic
       </Text>
@@ -60,15 +56,27 @@ export default function signInForm() {
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        className='bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12
-        '
+        className='bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12'
         onPress={() => {
-          handleSignUp() // This could be your sign-in logic
-          handleLoginNavigation() // Navigate to HomeTabNavigator
+          handleSignUp()
+          handleLoginNavigation()
         }}
       >
         <Text className='font-bold text-black opacity-70 text-base'>Login</Text>
       </TouchableOpacity>
+      <View className='flex-row mt-2 text-center text-sm'>
+        <View>
+          <Text className='font-poppins '>Does not have an account? </Text>
+        </View>
+        <TouchableOpacity>
+          <Text
+            className='text-signIn-default font-poppins'
+            onPress={handleCreateAccountNavigation}
+          >
+            Create Account
+          </Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar style='auto' />
     </StyledView>
   )

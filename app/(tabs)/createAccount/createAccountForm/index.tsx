@@ -4,6 +4,7 @@ import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 const StyledText = styled(Text)
 const StyledView = styled(View)
@@ -18,8 +19,11 @@ export default function CreateAccountForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 
-  const handleSignUp = () => {
+  const handleRegister = () => {
     console.log({ fullName, phoneNumber, password, repeatPassword })
+  }
+  const handleSignInNavigation = () => {
+    router.push('../signInForm')
   }
 
   const isFormValid = () => {
@@ -33,15 +37,6 @@ export default function CreateAccountForm() {
 
   return (
     <StyledView className='flex-1 items-center justify-center bg-arawMatic-default p-4'>
-      {/* Back Button */}
-      <TouchableOpacity
-        className='absolute top-4 left-4'
-        onPress={() => router.back()}
-      >
-        <Text className='text-black opacity-60 font-semibold'>
-          {'< '}Go back
-        </Text>
-      </TouchableOpacity>
       <Text className='text-xl font-bold opacity-75 mb-[14px]'>
         Welcome Onboard!
       </Text>
@@ -101,7 +96,7 @@ export default function CreateAccountForm() {
         className={`bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12 ${
           isFormValid() ? '' : 'opacity-50'
         }`}
-        onPress={handleSignUp}
+        onPress={handleRegister}
         disabled={!isFormValid()}
       >
         <Text
@@ -113,12 +108,19 @@ export default function CreateAccountForm() {
         </Text>
       </TouchableOpacity>
 
-      <Text className='mt-2 text-center font-sans'>
-        Already have an account?{' '}
-        <TouchableOpacity className='inline'>
-          <StyledText className='text-signIn-default'>Sign In</StyledText>
+      <View className='flex-row mt-2 text-center text-sm'>
+        <View>
+          <Text className='font-poppins '>Already have an account? </Text>
+        </View>
+        <TouchableOpacity>
+          <StyledText
+            className='text-signIn-default font-poppins'
+            onPress={handleSignInNavigation}
+          >
+            Sign In
+          </StyledText>
         </TouchableOpacity>
-      </Text>
+      </View>
       <StatusBar style='auto' />
     </StyledView>
   )

@@ -12,6 +12,9 @@ module.exports = {
         'button-default': '#EDEDFF',
         'signIn-default': '#50C2C9',
       },
+      fontFamily: {
+        poppins: ['Poppins-Regular', 'sans-serif'], // Add your font family here
+      },
     },
   },
   plugins: [],
