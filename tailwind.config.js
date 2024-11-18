@@ -11,7 +11,7 @@ module.exports = {
         'arawMatic-default': '#FFFFED',
         'button-default': '#EDEDFF',
         'signIn-default': '#50C2C9',
-        'signOut-default': '#F01E2C',
+        'signOut-default': '#BE0000',
       },
       fontFamily: {
         poppins: ['Poppins-Regular', 'sans-serif'], // Add your font family here

@@ -21,6 +21,7 @@ export default function CreateAccountForm() {
 
   const handleRegister = () => {
     console.log({ fullName, phoneNumber, password, repeatPassword })
+    router.push('../signInForm')
   }
   const handleSignInNavigation = () => {
     router.push('../signInForm')
