@@ -4,7 +4,8 @@ import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { database } from '../../../../firebaseConfig' // Import your database
+import { ref, set } from 'firebase/database' // Import necessary methods
 
 const StyledText = styled(Text)
 const StyledView = styled(View)
@@ -19,10 +20,36 @@ export default function CreateAccountForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 
-  const handleRegister = () => {
-    console.log({ fullName, phoneNumber, password, repeatPassword })
-    router.push('../signInForm')
+  const handleRegister = async () => {
+    const userId = phoneNumber // Use phone number as a unique identifier
+    const sanitizedUserId = String(userId).replace(/\D/g, '') // Sanitize user ID
+
+    console.log('User ID:', sanitizedUserId) // Debugging line
+
+    // Create a reference to the database path
+    const userRef = ref(database, `users/${sanitizedUserId}`)
+    console.log('Database Path:', userRef.toString()) // Log the database reference path
+
+    const userData = {
+      fullName,
+      phoneNumber: sanitizedUserId,
+      password,
+    }
+
+    try {
+      await set(userRef, userData)
+      console.log('User registered successfully')
+      router.push('../signInForm') // Navigate after successful registration
+    } catch (error) {
+      // Type assertion to specify error is of type Error
+      if (error instanceof Error) {
+        console.error('Error registering user:', error.message)
+      } else {
+        console.error('Unexpected error registering user:', error)
+      }
+    }
   }
+
   const handleSignInNavigation = () => {
     router.push('../signInForm')
   }
@@ -110,14 +137,9 @@ export default function CreateAccountForm() {
       </TouchableOpacity>
 
       <View className='flex-row mt-2 text-center text-sm'>
-        <View>
-          <Text className='font-poppins '>Already have an account? </Text>
-        </View>
-        <TouchableOpacity>
-          <StyledText
-            className='text-signIn-default font-poppins'
-            onPress={handleSignInNavigation}
-          >
+        <Text className='font-poppins'>Already have an account? </Text>
+        <TouchableOpacity onPress={handleSignInNavigation}>
+          <StyledText className='text-signIn-default font-poppins'>
             Sign In
           </StyledText>
         </TouchableOpacity>

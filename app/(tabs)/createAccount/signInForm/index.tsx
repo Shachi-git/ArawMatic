@@ -1,25 +1,50 @@
 import { StatusBar } from 'expo-status-bar'
-import { Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import React from 'react'
+import { getDatabase, ref, get, child } from 'firebase/database' // Import Firebase Realtime Database
 
 const StyledView = styled(View)
 const StyledTextInput = styled(TextInput)
 
-export default function signInForm() {
+export default function SignInForm() {
   const router = useRouter()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const handleSignUp = () => {
-    console.log({ phoneNumber, password })
-  }
+  const handleSignIn = async () => {
+    const db = getDatabase()
+    const sanitizedPhoneNumber = phoneNumber.replace(/\D/g, '') // Sanitize input
 
-  const handleLoginNavigation = () => {
-    router.push('../../navigator')
+    try {
+      const userRef = ref(db, `users/${sanitizedPhoneNumber}`)
+      const snapshot = await get(userRef)
+      if (phoneNumber === '' && password === '') {
+        Alert.alert('Login Failed', 'Enter your phone number and password!')
+      } else if (phoneNumber !== '' && password === '') {
+        Alert.alert('Login Failed', 'Enter your password!')
+      } else if (phoneNumber === '' && password !== '') {
+        Alert.alert('Login Failed', 'Enter your phone number!')
+      } else {
+        if (snapshot.exists()) {
+          const userData = snapshot.val()
+          if (userData.password === password) {
+            console.log('Login successful!')
+            router.push('../../navigator')
+          } else {
+            Alert.alert('Login Failed', 'Incorrect password.')
+          }
+        } else {
+          Alert.alert('Login Failed', 'No user found with this phone number.')
+        }
+      }
+    } catch (error) {
+      console.error('Error during sign in:', error)
+      Alert.alert('Login Failed', 'An unexpected error occurred.')
+    }
   }
 
   const handleCreateAccountNavigation = () => {
@@ -57,22 +82,14 @@ export default function signInForm() {
       </View>
       <TouchableOpacity
         className='bg-button-default px-32 py-4 rounded-md shadow-lg shadow-black mb-10 mt-12'
-        onPress={() => {
-          handleSignUp()
-          handleLoginNavigation()
-        }}
+        onPress={handleSignIn} // Call handleSignIn on press
       >
         <Text className='font-bold text-black opacity-70 text-base'>Login</Text>
       </TouchableOpacity>
       <View className='flex-row mt-2 text-center text-sm'>
-        <View>
-          <Text className='font-poppins '>Does not have an account? </Text>
-        </View>
-        <TouchableOpacity>
-          <Text
-            className='text-signIn-default font-poppins'
-            onPress={handleCreateAccountNavigation}
-          >
+        <Text className='font-poppins'>Does not have an account? </Text>
+        <TouchableOpacity onPress={handleCreateAccountNavigation}>
+          <Text className='text-signIn-default font-poppins'>
             Create Account
           </Text>
         </TouchableOpacity>
