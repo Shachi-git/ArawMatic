@@ -4,8 +4,8 @@ import { styled } from 'nativewind'
 import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import React from 'react'
-import { database } from '../../../../firebaseConfig' // Import your database
-import { ref, set } from 'firebase/database' // Import necessary methods
+import { database } from '../../../../firebaseConfig'
+import { ref, set } from 'firebase/database'
 
 const StyledText = styled(Text)
 const StyledView = styled(View)
@@ -21,14 +21,13 @@ export default function CreateAccountForm() {
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 
   const handleRegister = async () => {
-    const userId = phoneNumber // Use phone number as a unique identifier
-    const sanitizedUserId = String(userId).replace(/\D/g, '') // Sanitize user ID
+    const userId = phoneNumber
+    const sanitizedUserId = String(userId).replace(/\D/g, '')
 
-    console.log('User ID:', sanitizedUserId) // Debugging line
+    console.log('User ID:', sanitizedUserId)
 
-    // Create a reference to the database path
     const userRef = ref(database, `users/${sanitizedUserId}`)
-    console.log('Database Path:', userRef.toString()) // Log the database reference path
+    console.log('Database Path:', userRef.toString())
 
     const userData = {
       fullName,
@@ -39,9 +38,8 @@ export default function CreateAccountForm() {
     try {
       await set(userRef, userData)
       console.log('User registered successfully')
-      router.push('../signInForm') // Navigate after successful registration
+      router.push('./verificationCodeForm')
     } catch (error) {
-      // Type assertion to specify error is of type Error
       if (error instanceof Error) {
         console.error('Error registering user:', error.message)
       } else {
@@ -53,7 +51,6 @@ export default function CreateAccountForm() {
   const handleSignInNavigation = () => {
     router.push('../signInForm')
   }
-
   const isFormValid = () => {
     return (
       fullName &&
